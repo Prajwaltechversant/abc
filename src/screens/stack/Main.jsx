@@ -7,6 +7,7 @@ import LoginStack from './LoginStack'
 import HomeStack from './HomeStack'
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { LoginContextAPI } from '../../context/LoginContext'
+import BottomTabStack from './HomeStack'
 
 
 
@@ -32,7 +33,8 @@ export default function Main() {
         !token ?
           <LoginStack />
           :
-          <HomeStack />}
+          <BottomTabStack/>
+          }
     </>
   )
 }
