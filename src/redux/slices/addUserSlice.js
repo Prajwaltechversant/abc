@@ -1,28 +1,55 @@
+// import { PayloadAction, createSlice } from '@reduxjs/toolkit';
+
+// export const addUserSlice = createSlice({
+//   name: 'addUser',
+//   initialState: {
+//     userData: [],
+//   } ,
+//   reducers: {
+//     signupUser: (state, action) => {
+//       state.userData.push(action.payload);
+//     },
+//   },
+// });
+
+// export default addUserSlice.reducer;
+
+
+
 import { createSlice } from "@reduxjs/toolkit";
-
-
 
 export const addUserSlice = createSlice({
     name:'addUser',
-    initialState:[],
+    initialState:{
+        userData:[]
+    },
 
     reducers:{
         signupUser:(state, action)=>{
-            // console.log("adduser slice-----", action.payload)
-            state.push(action.payload)
-            console.log(state,"sssssssssssss")
-        },
 
-        signInuser:(state,action)=>{
-            // console.log("login slice---------",action.payload)
-            const {username, password} = action.payload;
-           const user = state.find(user=>user.username===username && user.password===password)
-        //    console.log(user, "user")
-           return user
+            console.log("adduser slice-----", action.payload) 
+            return({...state, userData:action.payload})
+            // state.userData.push(action.payload)
+
+        },
+        signInUser:(state, action)=>{
+            const {username, password} = action.payload
+            console.log(state.userData)
+            return state.userData.filter(item=>item.username===username && item.password ===password)
+        },
+        updateData:(state, action)=>{
+            const user = state.filter(item=>{item.username})
+            // return({...state, })
+            if(user){
+                return({...state, userData:action.payload})
+            }else{
+                return "Not Found"
+            }
         }
+
     }
 })
 
-export const {signupUser,signInuser} = addUserSlice.actions
-
+export const { signupUser, signInUser } = addUserSlice.actions; 
 export default addUserSlice.reducer
+

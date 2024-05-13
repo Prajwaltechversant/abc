@@ -8,6 +8,7 @@ import HomeStack from './HomeStack'
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { LoginContextAPI } from '../../context/LoginContext'
 import BottomTabStack from './HomeStack'
+import { useSelector } from 'react-redux'
 
 
 
@@ -15,7 +16,11 @@ import BottomTabStack from './HomeStack'
 export default function Main() {
   const [token,setToken] = useState(false)
   const {  isLogged } = useContext(LoginContextAPI)
-
+  const data = useSelector((state) => state.userData)
+  AsyncStorage.getItem('perist:root').then((res)=>{
+    const b = JSON.parse(res)
+    console.log(b,"aas")
+  })
   const checkIsLogged = async()=>{
     const response = await AsyncStorage.getItem('isLogged')
     if(response){

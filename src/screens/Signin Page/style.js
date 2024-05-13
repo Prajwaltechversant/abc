@@ -37,6 +37,7 @@ const styles = StyleSheet.create({
         backgroundColor: 'yellow',
         borderRadius: 20,
         width: '100%',
+        color:'black'
     },
     loginBox: {
         marginVertical: 10,

@@ -10,7 +10,8 @@ const styles = StyleSheet.create({
     container: {
         justifyContent: 'center',
         alignItems: 'center',
-        height: "100%"
+        height: "100%",
+        color:'black'
     },
     formContainer: {
         backgroundColor: '#b1b9c7',
@@ -29,7 +30,8 @@ const styles = StyleSheet.create({
         backgroundColor: 'yellow',
         padding: 10,
         borderRadius: 20,
-        marginVertical: 10
+        marginVertical: 10,
+        color:'black'
     },
     loginBox: {
         marginVertical:10,

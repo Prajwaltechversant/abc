@@ -3,7 +3,7 @@ import React, { useContext, useEffect, useState } from 'react'
 import styles from './style'
 import BouncyCheckbox from "react-native-bouncy-checkbox";
 import { useDispatch, useSelector } from 'react-redux';
-import { signInuser } from '../../redux/slices/addUserSlice';
+import { signInUser, signInuser } from '../../redux/slices/addUserSlice';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { LoginContextAPI } from '../../context/LoginContext';
 import * as Keychain from 'react-native-keychain';
@@ -11,31 +11,24 @@ import * as Keychain from 'react-native-keychain';
 import AntDesign from 'react-native-vector-icons/AntDesign'
 import { getUserCred, setKeyChain, route } from './keychain';
 import { useScreenContext } from '../../context/ScreenContextProvider';
+import UserContext, { UserContextAPI } from '../../context/userContext';
 export default function Login({ navigation, route }) {
     const dispatch = useDispatch()
-    const data = useSelector(state => state.addUser)
 
+    const data = useSelector((state) => state.addUser)
     const { setIsLogged } = useContext(LoginContextAPI)
     const [showPassword, setShowPassword] = useState(false)
+    console.log(data, "aa")
 
-    // const screenContext = useScreenContext()
-
-
-    // const screenStyles = styles(screenContext,
-    //     screenContext[screenContext.isPortrait ? 'windoWidth' : 'windoHeight'],
-    // )
-
+    const [userData, setUserData] = useState()
     const [isCheckedRememberMe, setIsCheckedRememberMe] = useState(false)
-    // console.log(data, "aaaa")
-    // const usersData = useSelector(state=>state.)
+    const {user, setUser} = useContext(UserContextAPI)
+
     const [loginData, setLoginData] = useState({
         username: "",
         password: ""
     })
 
-    // useEffect(() => {
-    //     console.log(loginData);
-    // }, [loginData])
     // console.log(navigation)
     const handleNavigate = () => {
         navigation.push('Signup')
@@ -48,26 +41,24 @@ export default function Login({ navigation, route }) {
             Alert.alert("Please fill the form completely")
         }
         else {
-            // const response =dispatch(signInuser(loginData))
-            // console.log(response)
-            const user = data.filter(item => item.username === username && item.password === password)
-            // console.log(user)
-            if (user.length > 0) {
+
+            console.log(data,"ggg")
+            // const user = dispatch(signInUser(loginData))
+            const user = data.userData.filter(item => item.username === username && item.password === password)
+            setUserData(user)
+            setUser(user)
+            if (user?.length > 0) {
                 try {
                     if (isCheckedRememberMe) {
                         setKeyChain(loginData)
                         await AsyncStorage.setItem('isLogged', "true")
                         setIsLogged("true")
-                        // const e = await AsyncStorage.getItem(`user_${username}`)
-                        // const ee = JSON.parse(e)
-                        // console.log("e", ee)
                     }
                     else {
                         await AsyncStorage.setItem('isLogged', "true")
                         setIsLogged("true")
                     }
-                    //   const response =  await Keychain.getGenericPassword()
-                    //   console.log(response, "keychain")
+  
                 }
                 catch (err) {
                     console.log(err)
@@ -150,8 +141,8 @@ export default function Login({ navigation, route }) {
 
                 </View>
                 <View style={styles.loginBox}>
-                    <TouchableOpacity>
-                        <Text style={{ color: 'white' }} onPress={handleLogin}>login</Text>
+                    <TouchableOpacity onPress={handleLogin}>
+                        <Text style={{ color: 'white' }} >login</Text>
                     </TouchableOpacity>
                 </View>
                 <View style={styles.signupBox}>
