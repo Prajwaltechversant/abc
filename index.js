@@ -8,6 +8,7 @@ import {name as appName} from './app.json';
 import { Provider } from 'react-redux';
 import { PersistGate } from 'redux-persist/integration/react';
 import { persistor, store } from './src/redux/store';
+// import Product from './src/components/ProductItem';
 
 
 const Root = () => (

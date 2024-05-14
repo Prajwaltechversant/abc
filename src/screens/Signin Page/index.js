@@ -42,7 +42,7 @@ export default function Login({ navigation, route }) {
         }
         else {
 
-            console.log(data,"ggg")
+            console.log(data,"state  ")
             // const user = dispatch(signInUser(loginData))
             const user = data.userData.filter(item => item.username === username && item.password === password)
             setUserData(user)
@@ -117,7 +117,7 @@ export default function Login({ navigation, route }) {
                             secureTextEntry={!showPassword}
                             style={styles.inputBox}
                             onChangeText={(e) => setLoginData({ ...loginData, password: e })}
-                            value={loginData.password}
+                            value={loginData.password} 
                         />
                         <TouchableOpacity onPress={setShowPasswordfn}>
                             <AntDesign name='eye' style={styles.icon} color='green' />
@@ -125,7 +125,6 @@ export default function Login({ navigation, route }) {
                     </View>
                 </View>
                 <View>
-
                     <BouncyCheckbox
 
                         size={25}
@@ -138,7 +137,6 @@ export default function Login({ navigation, route }) {
                         onPress={() => setIsCheckedRememberMe(!isCheckedRememberMe)}
 
                     />
-
                 </View>
                 <View style={styles.loginBox}>
                     <TouchableOpacity onPress={handleLogin}>

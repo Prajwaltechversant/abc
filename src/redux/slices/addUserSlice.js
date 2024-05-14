@@ -23,18 +23,17 @@ export const addUserSlice = createSlice({
     initialState:{
         userData:[]
     },
-
     reducers:{
         signupUser:(state, action)=>{
 
             console.log("adduser slice-----", action.payload) 
-            return({...state, userData:action.payload})
-            // state.userData.push(action.payload)
+            // return({...state, userData:action.payload})
+            state.userData.push(action.payload)
+            console.log(state)
 
         },
         signInUser:(state, action)=>{
             const {username, password} = action.payload
-            console.log(state.userData)
             return state.userData.filter(item=>item.username===username && item.password ===password)
         },
         updateData:(state, action)=>{
