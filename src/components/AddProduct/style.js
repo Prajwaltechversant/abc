@@ -1,16 +1,20 @@
 import { StyleSheet } from "react-native";
 
 const styles = StyleSheet.create({
+  root: {
+    maxHeight: '60',
+    position:'fixed',
+    bottom:-600,
+    zIndex:1000
+  },
   container: {
     flexDirection: 'row',
     justifyContent: 'flex-end',
     alignItems: 'flex-start',
-    position: 'fixed',
+    position: 'absolute',
     right: 10,
-    left:1,
-    backfaceVisibility: 'hidden',
-    zIndex:10000,
-    
+    left: 1,
+
 
   },
   IconButton: {
@@ -39,16 +43,16 @@ const styles = StyleSheet.create({
     borderRadius: 20,
     // padding: 55,
     alignItems: 'center',
-    justifyContent:'center',
-    flex:1
+    justifyContent: 'center',
+    flex: 1
   },
   textStyle: {
     color: 'black',
     fontSize: 20
   },
-  btn:{
-    flexDirection:'row',
-    justifyContent:'space-between'
+  btn: {
+    flexDirection: 'row',
+    justifyContent: 'space-between'
   }
 
 })

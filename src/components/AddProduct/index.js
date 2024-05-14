@@ -45,7 +45,7 @@ export default function Add() {
         }
     }
     return (
-        <>
+        <View style={styles.root}>
             <View style={styles.container} >
                 <IconButton
                     icon={'message-plus'}
@@ -95,6 +95,6 @@ export default function Add() {
                 </Modal>
             </View>
 
-        </>
+        </View>
     )
 }

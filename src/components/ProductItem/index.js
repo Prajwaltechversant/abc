@@ -12,10 +12,10 @@ export default function Product({ item }) {
 
     return (
         <Card style={styles.card}>
-            <Card.Title title={item.title}  left={LeftContent} />
+            <Card.Title title={item.title} left={LeftContent} />
             <Card.Cover source={{ uri: item.uri }} />
             <Card.Actions>
-                <Button onPress={()=>dispatch(deleteProduct(item.title))}>Delete</Button>
+                <Button onPress={() => dispatch(deleteProduct(item.title))}>Delete</Button>
             </Card.Actions>
         </Card>
     )

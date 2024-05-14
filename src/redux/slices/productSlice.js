@@ -19,9 +19,13 @@ export const productSlice = createSlice({
             // const {title} = action.payload;
             return state.filter(item=>item.title !==action.payload)
             
+        },
+
+        searchProduct:(state, action)=>{
+            return state.filter(item=>item.title ===action.payload)
         }
     }
 })
 
-export const {addProduct, deleteProduct} = productSlice.actions
+export const {addProduct, deleteProduct, searchProduct} = productSlice.actions
 export default productSlice.reducer
