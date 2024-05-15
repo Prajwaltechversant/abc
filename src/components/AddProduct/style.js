@@ -1,11 +1,11 @@
 import { StyleSheet } from "react-native";
 
-const styles = StyleSheet.create({
+const styles =(screenContext, width, height)=> StyleSheet.create({
   root: {
-    maxHeight: '60',
+    height:60,
     position:'fixed',
-    bottom:-600,
-    zIndex:1000
+    bottom:-560,
+    zIndex:1000,
   },
   container: {
     flexDirection: 'row',
@@ -14,7 +14,7 @@ const styles = StyleSheet.create({
     position: 'absolute',
     right: 10,
     left: 1,
-
+    top: screenContext.windowisPortrait ? 0 :-100
 
   },
   IconButton: {
@@ -27,7 +27,7 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    marginTop: 200,
+    marginTop: screenContext.windowisPortrait ? 15 :2,
     alignSelf: 'center',
     // backgroundColor:'transparent',
 

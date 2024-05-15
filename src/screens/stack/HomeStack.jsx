@@ -5,6 +5,9 @@ import Home from '../Home'
 import { createDrawerNavigator } from '@react-navigation/drawer'
 import Profile from '../Profile'
 import Entypo from 'react-native-vector-icons/Entypo'
+import Logout from '../Logout'
+import WishList from '../WishList'
+import Animation from '../Animation'
 const Tab = createBottomTabNavigator()
 
 const Drawer = createDrawerNavigator()
@@ -13,7 +16,11 @@ const HomeStack = ()=>{
 return(
   <>
   <Drawer.Navigator initialRouteName="Home">
-    <Drawer.Screen name='HomeDrawer' component={Home}  options={{title:"Home"}} />
+    <Drawer.Screen name='HomeDrawer' component={Home}  options={{title:"Home",
+      headerRight:()=>(
+       <Logout />
+      )
+    }} />
     <Drawer.Screen name='Profile' component={Profile} />
   </Drawer.Navigator>
   </>
@@ -29,6 +36,8 @@ export default function BottomTabStack() {
             <Entypo name='home' color={'red'} size={size}  />
           )
         }}/>
+        <Tab.Screen name='wishlist' component={WishList} />
+        <Tab.Screen  name='animation' component={Animation}  />
     </Tab.Navigator>
   )
 }

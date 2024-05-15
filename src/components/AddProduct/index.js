@@ -7,6 +7,7 @@ import { TextInput, Button } from 'react-native-paper';
 import { launchCamera, launchImageLibrary } from 'react-native-image-picker';
 import { addProduct } from '../../redux/slices/productSlice';
 import { useDispatch } from 'react-redux';
+import { useScreenContext } from '../../context/ScreenContextProvider';
 
 
 
@@ -17,6 +18,15 @@ export default function Add() {
     const containerStyle = { backgroundColor: 'white' };
     const [text, setText] = React.useState("");
 
+
+    const screenContext = useScreenContext()
+
+    const screenStyles = styles(screenContext,
+        screenContext[screenContext.windowisPortrait ? 'windoWidth' : 'windoHeight'],
+        screenContext[screenContext.windowisPortrait ? 'windowHeight' : 'windowWidth']
+    )
+
+
     const dispatch = useDispatch()
 
     const [product, setProduct] = useState({
@@ -26,8 +36,8 @@ export default function Add() {
 
     const handleUpload = async () => {
 
-        const result = await launchImageLibrary()
-        // console.log(result.assets[0].uri)
+        const result = await launchCamera()
+        console.log(result.assets[0].uri)
         setProduct({ ...product, uri: result.assets[0].uri })
 
     }
@@ -45,8 +55,8 @@ export default function Add() {
         }
     }
     return (
-        <View style={styles.root}>
-            <View style={styles.container} >
+        <View style={screenStyles.root}>
+            <View style={screenStyles.container} >
                 <IconButton
                     icon={'message-plus'}
                     mode='contained'
@@ -59,11 +69,12 @@ export default function Add() {
                 />
             </View>
 
+            
 
-            <View style={styles.modalContainer}>
-                <Modal visible={visible} style={styles.modalContainer} >
-                    <View style={styles.modalView}>
-                        <Text style={styles.textStyle}> Add Product </Text>
+            <View style={screenStyles.modalContainer}>
+                <Modal visible={visible} style={screenStyles.modalContainer} >
+                    <View style={screenStyles.modalView}>
+                        <Text style={screenStyles.textStyle}> Add Product </Text>
                         <KeyboardAvoidingView>
                             <View>
                                 <TextInput
@@ -71,19 +82,19 @@ export default function Add() {
                                     label={'Product'}
                                     placeholder='Product title'
                                     multiline={true}
-                                    style={styles.inputBox}
+                                    style={screenStyles.inputBox}
                                     onChangeText={(e) => setProduct({ ...product, title: e })}
                                 />
 
                                 {/* <Text style={{ textAlign: 'center' }}>Or</Text> */}
                                 <Button icon="upload" mode="contained"
-                                    style={styles.inputBox}
+                                    style={screenStyles.inputBox}
                                     onPress={handleUpload}>
                                     Upload Product Image
                                 </Button>
                             </View>
                         </KeyboardAvoidingView>
-                        <View style={styles.btn}>
+                        <View style={screenStyles.btn}>
                             <Button icon="cancel" mode="contained" onPress={hideModal}>
                                 Cancel
                             </Button>

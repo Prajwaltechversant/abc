@@ -25,7 +25,6 @@ export const addUserSlice = createSlice({
     },
     reducers:{
         signupUser:(state, action)=>{
-
             console.log("adduser slice-----", action.payload) 
             // return({...state, userData:action.payload})
             state.userData.push(action.payload)

@@ -1,12 +1,12 @@
-import {  useWindowDimensions, Dimensions } from 'react-native'
+import { useWindowDimensions, Dimensions } from 'react-native'
 import React, { useContext, useEffect, useState } from 'react'
-// import { isTablet} from 'react-native-device-info'
+import { isTablet } from 'react-native-device-info';
 
 const ScreenContext = React.createContext()
 
-export const useScreenContext = () => useContext(ScreenContext) ;
+export const useScreenContext = () => useContext(ScreenContext);
 
-export default function ScreenContextProvider({children}) {
+export default function ScreenContextProvider({ children }) {
     const dimensions = useWindowDimensions()
 
     // screen dimentions
@@ -19,14 +19,14 @@ export default function ScreenContextProvider({children}) {
 
     const isPortrait = height > width;
 
-    // let isTabletType = isTablet()
+    let isTabletType = isTablet()
 
     // states for dimentions
     const [windowWidth, setWindowWidth] = useState(width);
     const [windowHeight, setWindowHeight] = useState(height);
     const [windowScale, setWindowscale] = useState(scale);
     const [windowFontScale, setWindowFontScale] = useState(fontScale);
-    const [windowisPortrait,setWindowisPortrait] = useState(isPortrait)
+    const [windowisPortrait, setWindowisPortrait] = useState(isPortrait)
 
 
     function setDimensions() {
@@ -46,10 +46,8 @@ export default function ScreenContextProvider({children}) {
 
     return (
         <ScreenContext.Provider
-            value={{ windowHeight, windowWidth, windowFontScale, windowScale, windowisPortrait }}>
-
+            value={{ windowHeight, windowWidth, windowFontScale, windowScale, windowisPortrait, isTabletType }}>
             {children}
-
         </ScreenContext.Provider >
 
     )

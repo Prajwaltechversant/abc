@@ -1,10 +1,9 @@
-import { View, Text } from 'react-native'
+import { View, Text, Image } from 'react-native'
 import React from 'react'
-import styles from './style'
 import { useScreenContext } from '../../context/ScreenContextProvider'
+import styles from './style'
 
-
-export default function index() {
+export default function SplashScreen() {
 
 
     const screenContext = useScreenContext()
@@ -15,7 +14,7 @@ export default function index() {
         screenContext[screenContext.isPortrait ? 'windowHeight' : 'windowWidth']
     )
     return (
-        <View style={styles.container}>
+        <View style={screenStyles.container}>
                 <Image style={styles.logo} source={{ uri: 'https://static.vecteezy.com/system/resources/previews/000/585/540/original/m-logo-business-template-vector-icon.jpg' }} width={100} height={100} />
 
         </View>

@@ -9,13 +9,16 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import { LoginContextAPI } from '../../context/LoginContext'
 import BottomTabStack from './HomeStack'
 import { useSelector } from 'react-redux'
-
+import SplashScreen from '../splashscreen'
 
 
 
 export default function Main() {
   const [token,setToken] = useState(false)
   const {  isLogged } = useContext(LoginContextAPI)
+  const [isLoading, setisloading] = React.useState(true)
+
+  console.log(isLogged)
   const data = useSelector((state) => state.userData)
   AsyncStorage.getItem('perist:root').then((res)=>{
     const b = JSON.parse(res)
@@ -28,10 +31,20 @@ export default function Main() {
     }else{
       setToken(false)
     }
+    setisloading(false)
+
   }
   useEffect(()=>{
     checkIsLogged()
   },[isLogged])
+
+  if (isLoading) {
+    return (
+      <SplashScreen/>
+
+    )
+  }
+
   return (
     <>
       {

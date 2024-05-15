@@ -6,7 +6,10 @@ const styles = (screenContext, width, height) =>
         container: {
             flex: 1,
             justifyContent: 'center',
-            alignItems: 'center'
+            alignItems: 'center',
+            height:'100%',
+            width:'100%',
+            backgroundColor:'white'
         },
         logo:{
             width:100,
