@@ -14,9 +14,18 @@ import { useScreenContext } from '../../context/ScreenContextProvider';
 export default function Add() {
     const [visible, setVisible] = React.useState(false);
     const showModal = () => setVisible(true);
-    const hideModal = () => setVisible(false);
+    const hideModal = () => {
+        setVisible(false)
+        setProduct({
+            title: "",
+            thumbnailuri: "",
+            description: ""
+        })
+    };
     const containerStyle = { backgroundColor: 'white' };
     const [text, setText] = React.useState("");
+
+    const [inputType, setinputType] = useState('')
 
 
     const screenContext = useScreenContext()
@@ -31,25 +40,45 @@ export default function Add() {
 
     const [product, setProduct] = useState({
         title: "",
-        uri: ""
+        thumbnailuri: "",
+        description: '',
+        price: '',
+        productImagesUri: []
     })
 
     const handleUpload = async () => {
-
+        setinputType('file')
         const result = await launchCamera()
         console.log(result.assets[0].uri)
-        setProduct({ ...product, uri: result.assets[0].uri })
-
+        setProduct({ ...product, thumbnailuri: result.assets[0].uri })
     }
     // console.log(product)
 
+    const handleFileUpload = async () => {
+        setinputType('camera')
+        const result = await launchImageLibrary()
+        console.log(result.assets[0].uri)
+        setProduct({ ...product, thumbnailuri: result.assets[0].uri })
+
+
+    }
+    const handleProductImages = async () => {
+
+        let options = {
+            selectionLimit: 3
+        }
+        const result = await launchImageLibrary(options)
+        const imageUris = result.assets.map(item => item.uri)
+        setProduct({ ...product, productImagesUri: imageUris })
+    }
+    console.log(product)
 
     const handleSubmit = () => {
-        const { title, uri } = product
-        if (!product || !uri) {
+        const { title, thumbnailuri, productImagesUri, description, price } = product
+        if (!title || !thumbnailuri ||!productImagesUri ||!description ||!price) {
             Alert.alert("Please add all details to proceed")
         }
-        else{
+        else {
             dispatch(addProduct(product))
             hideModal()
         }
@@ -69,14 +98,14 @@ export default function Add() {
                 />
             </View>
 
-            
+
 
             <View style={screenStyles.modalContainer}>
                 <Modal visible={visible} style={screenStyles.modalContainer} >
                     <View style={screenStyles.modalView}>
                         <Text style={screenStyles.textStyle}> Add Product </Text>
                         <KeyboardAvoidingView>
-                            <View>
+                            <View style={screenStyles.inputBoxContainer}>
                                 <TextInput
                                     mode='flat'
                                     label={'Product'}
@@ -85,13 +114,28 @@ export default function Add() {
                                     style={screenStyles.inputBox}
                                     onChangeText={(e) => setProduct({ ...product, title: e })}
                                 />
+                                <View>
+                                    <Text>Upload Thumbnail</Text>
+                                    <Button icon="upload" mode="contained"
+                                        style={screenStyles.inputBox}
+                                        onPress={handleFileUpload}>
+                                        Upload Product thuumbnail
+                                    </Button>
+                                    <Text style={{ textAlign: 'center' }}>Or</Text>
+                                    <Button icon="upload" mode="contained"
+                                        style={screenStyles.inputBox}
+                                        onPress={handleUpload}>
+                                        Upload Product Thumbnail
+                                    </Button>
+                                </View>
 
-                                {/* <Text style={{ textAlign: 'center' }}>Or</Text> */}
-                                <Button icon="upload" mode="contained"
-                                    style={screenStyles.inputBox}
-                                    onPress={handleUpload}>
-                                    Upload Product Image
-                                </Button>
+                                <TextInput multiline={true} placeholder='Description' onChangeText={(e) => setProduct({ ...product, description: e })} />
+                                <View>
+                                    <Button icon={'upload'} mode='container' style={screenStyles.inputBox} onPress={handleProductImages} >
+                                        Upload Product Images
+                                    </Button>
+                                </View>
+                                <TextInput placeholder='Price' keyboardType='number-pad' onChangeText={(e) => setProduct({ ...product, price: e })} />
                             </View>
                         </KeyboardAvoidingView>
                         <View style={screenStyles.btn}>

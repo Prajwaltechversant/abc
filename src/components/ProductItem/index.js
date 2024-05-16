@@ -22,7 +22,7 @@ export default function Product({ item }) {
        <View style={screenStyles.container}>
          <Card style={screenStyles.card}>
             <Card.Title title={item.title} style={screenStyles.cardTitle}  />
-            <Card.Cover source={{ uri: item.uri }} style={screenStyles.image} />
+            <Card.Cover source={{ uri: item. thumbnailuri}} style={screenStyles.image} />
             <Card.Actions style={screenStyles.cardAction}>
                 {/* <Button >Delete</Button> */}
                <View style={screenStyles.btnContainer}>

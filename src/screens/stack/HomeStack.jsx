@@ -8,6 +8,7 @@ import Entypo from 'react-native-vector-icons/Entypo'
 import Logout from '../Logout'
 import WishList from '../WishList'
 import Animation from '../Animation'
+import Gesture1 from '../gestureSample1'
 const Tab = createBottomTabNavigator()
 
 const Drawer = createDrawerNavigator()
@@ -38,6 +39,7 @@ export default function BottomTabStack() {
         }}/>
         <Tab.Screen name='wishlist' component={WishList} />
         <Tab.Screen  name='animation' component={Animation}  />
+        <Tab.Screen  name='gesture1'  component={Gesture1} />
     </Tab.Navigator>
   )
 }

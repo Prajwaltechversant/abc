@@ -17,6 +17,9 @@ const styles =(screenContext, width, height)=> StyleSheet.create({
     top: screenContext.windowisPortrait ? 0 :-100
 
   },
+  inputBoxContainer:{
+      marginHorizontal:10
+  },
   IconButton: {
     borderRadius: 12,
     alignSelf: 'flex-end',
@@ -51,6 +54,7 @@ const styles =(screenContext, width, height)=> StyleSheet.create({
     fontSize: 20
   },
   btn: {
+    marginTop:3,
     flexDirection: 'row',
     justifyContent: 'space-between'
   }

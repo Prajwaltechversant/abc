@@ -5,10 +5,12 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
 import Home from '../Home'
 import { createDrawerNavigator } from '@react-navigation/drawer'
 import Profile from '../Profile'
+import { createNativeStackNavigator } from '@react-navigation/native-stack'
 
 const Tab = createBottomTabNavigator()
 
 const Drawer = createDrawerNavigator()
+
 
 
 const HomeStack = ()=>{
